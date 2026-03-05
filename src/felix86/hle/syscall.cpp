@@ -77,7 +77,7 @@ private:
 
 // TODO: move me elsewhere
 bool try_strace_ioctl(int rdi, u64 rsi, u64 rdx, u64 result) {
-    if (!g_config.strace) {
+    if (!should_log_strace("ioctl", (ssize_t)result)) {
         return false;
     }
 
@@ -175,8 +175,8 @@ bool try_strace_ioctl(int rdi, u64 rsi, u64 rdx, u64 result) {
         CHECK_NAME(TCSETS);
         CHECK_NAME(TCSETSW);
 #undef CHECK_NAME
-        STRACE("ioctl(%d, %s, {c_iflag=%s, c_oflag=%s, c_cflag=%s, c_lflag=%s}) = %d", rdi, name.c_str(), c_iflag.c_str(), c_oflag.c_str(),
-               c_cflag.c_str(), c_lflag.c_str(), (int)result);
+        STRACE("ioctl(%d, %s, {c_iflag=%s, c_oflag=%s, c_cflag=%s, c_lflag=%s}) = %d", rdi, name.c_str(), c_iflag.c_str(),
+               c_oflag.c_str(), c_cflag.c_str(), c_lflag.c_str(), (int)result);
         return true;
     }
     }
@@ -1904,7 +1904,7 @@ void felix86_syscall(felix86_frame* frame) {
 
     state->SetGpr(X86_REF_RAX, result);
 
-    if (g_config.strace || (g_config.strace_errors && (i64)result < 0)) {
+    if (should_log_strace(x64_get_name(syscall_number), result)) {
         std::string trace = trace64(syscall_number, arg1, arg2, arg3, arg4, arg5, arg6);
         trace += " = ";
         if (result < 0) {
@@ -3057,7 +3057,7 @@ void felix86_syscall32(felix86_frame* frame, u32 rip_next) {
 
     state->SetGpr(X86_REF_RAX, result);
 
-    if (g_config.strace || (g_config.strace_errors && (i64)result < 0)) {
+    if (should_log_strace(x86_get_name(syscall_number), result)) {
         std::string trace = trace32(syscall_number, arg1, arg2, arg3, arg4, arg5, arg6);
         trace += " = ";
         if (result < 0) {

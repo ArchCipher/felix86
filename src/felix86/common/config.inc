@@ -9,8 +9,8 @@ X(General, bool, binfmt_misc_installed, false, FELIX86_BINFMT_MISC_INSTALLED, "W
 
 X(Logging, bool, verbose, false, FELIX86_VERBOSE, "Enable verbose logging", false)
 X(Logging, bool, quiet, false, FELIX86_QUIET, "Disable all logging", false)
-X(Logging, bool, strace, false, FELIX86_STRACE, "Enable logging of syscalls", false)
-X(Logging, bool, strace_errors, false, FELIX86_STRACE_ERRORS, "Enable logging of syscalls only when they error", false)
+X(Logging, std::string, strace, "", FELIX86_STRACE, "Syscalls to log, separated by ',', or 1 for all", false)
+X(Logging, std::string, strace_errors, "", FELIX86_STRACE_ERRORS, "Syscalls to log only on error, separated by ',', or 1 for all", false)
 X(Logging, bool, print_signals, false, FELIX86_PRINT_SIGNALS, "Print on every guest signal handler", false);
 X(Logging, bool, print_all_signals, false, FELIX86_PRINT_ALL_SIGNALS, "Print all signals, even ones that are caused by the emulator", false);
 X(Logging, bool, print_invalidations, false, FELIX86_PRINT_INVALIDATIONS, "Print amount of blocks invalidated", false);

@@ -4076,7 +4076,7 @@ FAST_HANDLE(SYSCALL) {
         Seccomp::emitFilters(as);
     }
 
-    if (!g_config.strace && g_config.inline_syscalls) {
+    if (g_config.strace.empty() && g_config.strace_errors.empty() && g_config.inline_syscalls) {
         bool inlined = rec.tryInlineSyscall();
         if (inlined) {
             return;

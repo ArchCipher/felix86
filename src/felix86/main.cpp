@@ -900,7 +900,7 @@ int main(int argc, char* argv[]) {
 #if 0
     // Use me if you want to strace a specific program only
     if (g_executable_path_absolute.string().find("python3") != std::string::npos) {
-        g_config.strace = 1;
+        g_config.strace = "1";
     }
 #endif
 

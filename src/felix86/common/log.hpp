@@ -81,7 +81,7 @@ private:
 
 #define STRACE(format, ...)                                                                                                                          \
     do {                                                                                                                                             \
-        if ((g_config.strace || g_config.strace_errors) && !g_config.quiet) {                                                                        \
+        if (!g_config.quiet && (!g_config.strace.empty() || !g_config.strace_errors.empty())) {                                                      \
             Logger::log(ANSI_COLOR_BLUE format ANSI_COLOR_RESET "\n", ##__VA_ARGS__);                                                                \
         }                                                                                                                                            \
     } while (0)

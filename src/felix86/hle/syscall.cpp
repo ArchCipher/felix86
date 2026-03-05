@@ -175,8 +175,8 @@ bool try_strace_ioctl(int rdi, u64 rsi, u64 rdx, u64 result) {
         CHECK_NAME(TCSETS);
         CHECK_NAME(TCSETSW);
 #undef CHECK_NAME
-        STRACE("ioctl(%d, %s, {c_iflag=%s, c_oflag=%s, c_cflag=%s, c_lflag=%s}) = %d", rdi, name.c_str(), c_iflag.c_str(),
-               c_oflag.c_str(), c_cflag.c_str(), c_lflag.c_str(), (int)result);
+        STRACE("ioctl(%d, %s, {c_iflag=%s, c_oflag=%s, c_cflag=%s, c_lflag=%s}) = %d", rdi, name.c_str(), c_iflag.c_str(), c_oflag.c_str(),
+               c_cflag.c_str(), c_lflag.c_str(), (int)result);
         return true;
     }
     }

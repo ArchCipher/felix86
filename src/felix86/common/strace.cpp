@@ -2963,7 +2963,7 @@ std::string trace32(int syscall_no, u64 arg1, u64 arg2, u64 arg3, u64 arg4, u64 
     }
 }
 
-bool should_log_strace( const char *name, ssize_t result ) {
+bool should_log_strace(const char* name, ssize_t result) {
     if (g_config.quiet || (g_config.strace.empty() && g_config.strace_errors.empty()))
         return false;
     if (g_config.strace == "1" || (g_config.strace_errors == "1" && result < 0))

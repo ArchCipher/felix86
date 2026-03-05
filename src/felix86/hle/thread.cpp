@@ -8,13 +8,13 @@
 #include <sys/resource.h>
 #include "felix86/common/log.hpp"
 #include "felix86/common/state.hpp"
+#include "felix86/common/strace.hpp"
 #include "felix86/common/types.hpp"
 #include "felix86/common/utility.hpp"
 #include "felix86/hle/mmap.hpp"
 #include "felix86/hle/signals.hpp"
 #include "felix86/hle/thread.hpp"
 #include "felix86/v2/recompiler.hpp"
-#include "felix86/common/strace.hpp"
 
 void* pthread_handler(void* args) {
     u32* finished;
@@ -335,8 +335,8 @@ long VForkMe(CloneArgs& args) {
 long Threads::Clone(ThreadState* current_state, CloneArgs* args) {
     std::string sflags = flags_to_string(args->guest_flags);
     if (should_log_strace("clone", 0)) {
-        STRACE("clone({%s}, stack: %llx, parid: %llx, ctid: %llx, tls: %llx)", sflags.c_str(), args->new_rsp, args->parent_tid,
-            args->child_tid, args->new_tls);
+        STRACE("clone({%s}, stack: %llx, parid: %llx, ctid: %llx, tls: %llx)", sflags.c_str(), args->new_rsp, args->parent_tid, args->child_tid,
+               args->new_tls);
     }
 
     bool clone_fs = args->guest_flags & CLONE_FS;
